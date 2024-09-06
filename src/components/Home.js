@@ -12,32 +12,39 @@ const Home = () => {
   return (
     <div className="container mt-4">
       <h2>CRUD App with React - Redux</h2>
-      <Link to='/addUser' className="btn btn-success my-3">Add User</Link>
-      <table className="table table-bordered table-light table-hover">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Domain</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user, id) =>
-            <tr key={id}>
-              <td>{user.id}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.domain}</td>
-              <td>
-                <Link to={`/editUser/${user.id}`} className="btn btn-info m-2">Edit</Link>
-                <button className="btn btn-danger" onClick={() => handleDelete(user.id)}>Delete</button>
-              </td>
+      <div>
+      <Link to='/addUser' className="btn btn-success my-3 adduserbtn">Add User</Link>
+      </div>
+
+      {users.length > 0 ?
+        <table className="table table-bordered table-light table-hover text-center">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Domain</th>
+              <th>Actions</th>
             </tr>
-          )}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {users.map((user, id) =>
+              <tr key={id}>
+                <td>{user.id}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.domain}</td>
+                <td>
+                  <Link to={`/editUser/${user.id}`} className="btn btn-info m-2">Edit</Link>
+                  <button className="btn btn-danger" onClick={() => handleDelete(user.id)}>Delete</button>
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+        :
+        null
+      }
     </div>
   )
 };
